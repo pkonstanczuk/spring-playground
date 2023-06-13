@@ -1,0 +1,31 @@
+# http://EditorConfig.org
+
+
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# End every file with a newline
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 160
+trim_trailing_whitespace = true
+
+ij_formatter_off_tag = @formatter:off
+ij_formatter_on_tag = @formatter:on
+ij_formatter_tags_enabled = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.py]
+indent_size = 4 # PEP 8
+
+# Makefiles
+[Makefile]
+indent_style = tab

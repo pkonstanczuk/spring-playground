@@ -1,0 +1,99 @@
+---
+openapi: 3.0.0
+info:
+  title: grocery store API
+  description: |
+    # Introduction
+    This is the description of the *spring-playground API*.
+    This specification is written in **OpenAPI Specification version 3** and can
+    be displayed using [Swagger](https://swagger.io).
+    ---
+  contact:
+    email: przemek.konstanczuk@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8080/spring-playground/api
+    description: local
+tags:
+  - name: store
+    description: "Store operations"
+paths:
+  /orders:
+    get:
+      operationId: listOrders
+      description: List existing orders
+      tags:
+        - store
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+
+components:
+  schemas:
+    Order:
+      required:
+        - products
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        orderId:
+          $ref: "#/components/schemas/OrderId"
+        totalCost:
+          $ref: "#/components/schemas/Price"
+        promotions:
+          type: array
+          maxItems: 2
+          items:
+            $ref: "#/components/schemas/Promotion"
+    OrderId:
+      type: string
+      readOnly: true
+      minLength: 1
+    Product:
+      required:
+        - category
+        - amount
+      properties:
+        category:
+          $ref: "#/components/schemas/ProductCategory"
+        amount:
+          $ref: "#/components/schemas/Amount"
+        totalCost:
+          $ref: "#/components/schemas/Price"
+    ProductCategory:
+      type: string
+      enum:
+        - APPLE
+        - ORANGE
+    Promotion:
+      type: string
+      enum:
+        - APPLE_DISCOUNT
+        - ORANGE_DISCOUNT
+    Price:
+      type: number
+      readOnly: true
+      minimum: 0.00
+    Amount:
+      type: integer
+      minimum: 0
+      default: 0
+  parameters:
+    orderId:
+      name: orderId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/OrderId"
+
+
+
+
