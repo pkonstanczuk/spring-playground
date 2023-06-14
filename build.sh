@@ -34,12 +34,12 @@ build-dist() {
 
 generateStubs() {
   _log-target "generate stubs"
-  gradle openApiGenerate
+  gradle spring-service:openApiGenerate
 }
 
 bootRun() {
   _log-target "bootRun"
-  gradle bootRun
+  gradle spring-service:bootRun
 }
 
 clean() {
@@ -54,7 +54,7 @@ all() {
   kformat
   tests
   build-dist
-#  bootRun
+  bootRun
 }
 
 gradle() {

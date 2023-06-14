@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-open class Main {
+class Main {
   companion object {
 
     private fun handleSpringGracefulClose() {
