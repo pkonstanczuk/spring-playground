@@ -9,7 +9,7 @@ enum class BuildDependencyType {
 }
 
 data class BuildDependency(val entry: String, val type: BuildDependencyType = BuildDependencyType.IMPLEMENTATION)
-class BuildPlugin internal constructor(val entry: String, val version: String? = null)
+data class BuildPlugin (val entry: String, val version: String? = null)
 
 val basicDependencies = setOf(
   BuildDependency("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"),
@@ -39,6 +39,9 @@ val springWebDependencies = setOf(
 val ExternalCommonPlugins = setOf(
   BuildPlugin("org.jlleitschuh.gradle.ktlint", "10.2.1"),
   BuildPlugin("org.jetbrains.kotlin.jvm", version = kotlinVersion),
+)
+
+val ExternalSpringPlugins = setOf(
   BuildPlugin("io.spring.dependency-management", "1.0.11.RELEASE"),
   BuildPlugin("org.springframework.boot", springBootVersion),
   BuildPlugin("org.openapi.generator", "6.6.0"),

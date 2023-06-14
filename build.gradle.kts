@@ -1,3 +1,11 @@
+plugins {
+  ExternalCommonPlugins
+    .plus(ExternalSpringPlugins)
+    .toSet()
+    .map { id(it.entry) version it.version apply false }
+  BuiltInCommonPlugins.map { id(it.entry) apply true }
+}
+
 allprojects {
   group = "pl.qkon"
   version = System.getenv("BUILD_VERSION") ?: "0.0.1"
@@ -15,5 +23,11 @@ allprojects {
   }
   repositories {
     mavenCentral()
+  }
+
+  tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+      jvmTarget = "11"
+    }
   }
 }

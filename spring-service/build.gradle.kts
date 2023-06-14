@@ -1,6 +1,9 @@
 plugins {
-  ExternalCommonPlugins.map { id(it.entry) version it.version }
-  BuiltInCommonPlugins.map { id(it.entry) }
+  BuiltInCommonPlugins
+    .plus(ExternalCommonPlugins)
+    .plus(ExternalSpringPlugins)
+    .toSet()
+    .map { id(it.entry) }
 }
 dependencies {
   basicDependencies
@@ -28,12 +31,6 @@ springBoot {
 java {
   sourceSets["main"].java {
     srcDir("build/rest/src/main/kotlin")
-  }
-}
-
-kotlin {
-  jvmToolchain {
-    languageVersion.set(JavaLanguageVersion.of(11))
   }
 }
 
